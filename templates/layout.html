@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diet Planner</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/tailwind.css') }}">
+</head>
+<body class="bg-gray-100 text-gray-900 font-montserrat">
+    <nav class="bg-white shadow-md">
+        <div class="container mx-auto px-4 py-2 flex justify-between items-center">
+            <a href="{{ url_for('home') }}" class="text-xl font-bold">Diet Planner</a>
+            <div class="space-x-4">
+                {% if 'email' in session %}
+                    <a href="{{ url_for('home') }}" class="text-blue-500 hover:underline">Home</a>
+                    <a href="{{ url_for('generate_diet_plan') }}" class="text-blue-500 hover:underline">Generate Diet Plan</a>
+                    <a href="{{ url_for('enter_api_key') }}" class="text-blue-500 hover:underline">Enter API Key</a>
+                    <a href="{{ url_for('logout') }}" class="text-red-500 hover:underline">Logout</a>
+                {% else %}
+                    <a href="{{ url_for('signup') }}" class="text-blue-500 hover:underline">Sign Up</a>
+                    <a href="{{ url_for('login') }}" class="text-blue-500 hover:underline">Log In</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    <div class="container mx-auto px-4 py-4">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="bg-white shadow-md rounded-lg p-6">
+    <div class="text-center">
+        <h1 class="text-4xl font-bold text-gray-800 mb-4">Welcome to Diet Planner</h1>
+        <p class="text-lg text-gray-600 mb-8">Your personalized diet planning assistant. Plan your meals, track your progress, and achieve your health goals.</p>
+        <div class="space-x-0 md:space-x-4 space-y-4 md:space-y-0 flex flex-col md:flex-row justify-center">
+            {% if 'email' in session %}
+            {% else %}
+            <a href="{{ url_for('signup') }}" class="btn bg-blue-500 text-white px-4 py-2 rounded">Sign Up</a>
+            <a href="{{ url_for('login') }}" class="btn bg-gray-500 text-white px-4 py-2 rounded">Log In</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+    <div class="bg-white shadow-md rounded-lg p-6">
+        <h2 class="text-2xl font-bold text-gray-800 mb-2">Personalized Diet Plans</h2>
+        <p class="text-gray-600">Get diet plans tailored to your specific needs and preferences.</p>
+    </div>
+    <div class="bg-white shadow-md rounded-lg p-6">
+        <h2 class="text-2xl font-bold text-gray-800 mb-2">Track Your Progress</h2>
+        <p class="text-gray-600">Monitor your progress with detailed tracking features integrated with Google Calendar.</p>
+    </div>
+    <div class="bg-white shadow-md rounded-lg p-6">
+        <h2 class="text-2xl font-bold text-gray-800 mb-2">Expert Recommendations</h2>
+        <p class="text-gray-600">Receive diet recommendations based on expert advice and the latest nutritional science.</p>
+    </div>
+</div>
+{% endblock %}

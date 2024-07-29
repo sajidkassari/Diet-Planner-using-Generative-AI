@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Diet Plan</title>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Diet Plan</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Meal</th>
+                <th>Food Item</th>
+                <th>Protein (g)</th>
+                <th>Carbs (g)</th>
+                <th>Fibre (g)</th>
+                <th>Sugar (g)</th>
+                <th>Calories</th>
+                <th>Fats (g)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in diet_plan %}
+            <tr>
+                <td class="px-4 py-2 border">{{ item.Meal }}</td>
+                <td class="px-4 py-2 border">{{ item.Food_Item }}</td>
+                <td class="px-4 py-2 border">{{ item.Protein }}</td>
+                <td class="px-4 py-2 border">{{ item.Carbs }}</td>
+                <td class="px-4 py-2 border">{{ item.Fibre }}</td>
+                <td class="px-4 py-2 border">{{ item.Sugar }}</td>
+                <td class="px-4 py-2 border">{{ item.Calories }}</td>
+                <td class="px-4 py-2 border">{{ item.Fats }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <h2>Total Nutrition</h2>
+    <p>Protein: {{ total_nutrition.protein_g }} g</p>
+    <p>Carbs: {{ total_nutrition.carbs_g }} g</p>
+    <p>Fibre: {{ total_nutrition.fibre_g }} g</p>
+    <p>Sugar: {{ total_nutrition.sugar_g }} g</p>
+    <p>Calories: {{ total_nutrition.calories }}</p>
+    <p>Fats: {{ total_nutrition.fats_g }} g</p>
+</body>
+</html>

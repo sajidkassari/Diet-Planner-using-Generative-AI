@@ -1,0 +1,103 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="bg-white shadow-md rounded-lg p-6">
+    <h2 class="text-2xl font-bold text-gray-800 mb-4">Generate Diet Plan</h2>
+    <form method="POST" class="space-y-4">
+        <div>
+            <label for="goal" class="block text-gray-700">Goal</label>
+            <select name="goal" id="goal" required class="w-full px-4 py-2 border rounded">
+                <option value="Weight Loss">Weight Loss</option>
+                <option value="Muscle Gain">Muscle Gain</option>
+                <option value="Maintenance">Maintenance</option>
+            </select>
+        </div>
+        <div>
+            <label for="food_type" class="block text-gray-700">Food Type</label>
+            <select name="food_type" id="food_type" required class="w-full px-4 py-2 border rounded">
+                <option value="Veg">Veg</option>
+                <option value="Non-Veg">Non-Veg</option>
+            </select>
+        </div>
+        <div>
+            <label for="protien" class="block text-gray-700">Minimum Protien in (g) (optional)</label>
+            <input type="text" name="protien" id="protien" class="w-full px-4 py-2 border rounded" placeholder="e.g., 120">
+        </div>
+        <div>
+            <label for="calories" class="block text-gray-700">Maximum calories (optional)</label>
+            <input type="text" name="calories" id="calories" class="w-full px-4 py-2 border rounded" placeholder="e.g., 1700">
+        </div>
+        <div>
+            <label for="height" class="block text-gray-700">Height (optional)</label>
+            <input type="text" name="height" id="height" class="w-full px-4 py-2 border rounded" placeholder="e.g., 170 cm">
+        </div>
+        <div>
+            <label for="weight" class="block text-gray-700">Weight (optional)</label>
+            <input type="text" name="weight" id="weight" class="w-full px-4 py-2 border rounded" placeholder="e.g., 70 kg">
+        </div>
+        <div>
+            <label for="bmi" class="block text-gray-700">BMI (optional)</label>
+            <input type="text" name="bmi" id="bmi" class="w-full px-4 py-2 border rounded" placeholder="e.g., 24.5">
+        </div>
+        <div>
+            <label for="plan_duration" class="block text-gray-700">Plan Duration</label>
+            <select name="plan_duration" id="plan_duration" class="w-full px-4 py-2 border rounded">
+                <option value="Day">Day</option>
+                <option value="Week">Week</option>
+                <option value="Month">Month</option>
+            </select>
+        </div>
+        <button type="submit" class="btn bg-blue-500 text-white px-4 py-2 rounded">Generate Plan</button>
+    </form>
+
+    {% if diet_plan %}
+    <div class="mt-8">
+        <h3 class="text-xl font-bold text-gray-800 mb-4">Generated Diet Plan</h3>
+        <div class="overflow-x-auto">
+            <table class="w-full border-collapse bg-white text-left">
+                <thead>
+                    <tr>
+                        <th class="px-4 py-2 border">Meal</th>
+                        <th class="px-4 py-2 border">Food Item</th>
+                        <th class="px-4 py-2 border">Protein (g)</th>
+                        <th class="px-4 py-2 border">Carbs (g)</th>
+                        <th class="px-4 py-2 border">Fibre (g)</th>
+                        <th class="px-4 py-2 border">Sugar (g)</th>
+                        <th class="px-4 py-2 border">Calories</th>
+                        <th class="px-4 py-2 border">Fats (g)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in diet_plan %}
+                    <tr>
+                        <td class="px-4 py-2 border">{{ item.Meal }}</td>
+                        <td class="px-4 py-2 border">{{ item.Food_Item }}</td>
+                        <td class="px-4 py-2 border">{{ item.Protein }}</td>
+                        <td class="px-4 py-2 border">{{ item.Carbs }}</td>
+                        <td class="px-4 py-2 border">{{ item.Fibre }}</td>
+                        <td class="px-4 py-2 border">{{ item.Sugar }}</td>
+                        <td class="px-4 py-2 border">{{ item.Calories }}</td>
+                        <td class="px-4 py-2 border">{{ item.Fats }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="mt-4">
+            <h3 class="text-lg font-bold text-gray-800">Total Nutrition</h3>
+            <p>Protein: {{ total_nutrition.protein_g }} g</p>
+            <p>Carbs: {{ total_nutrition.carbs_g }} g</p>
+            <p>Fibre: {{ total_nutrition.fibre_g }} g</p>
+            <p>Sugar: {{ total_nutrition.sugar_g }} g</p>
+            <p>Calories: {{ total_nutrition.calories }}</p>
+            <p>Fats: {{ total_nutrition.fats_g }} g</p>
+        </div>
+        <form method="POST" action="{{ url_for('export_pdf') }}">
+            <input type="hidden" name="diet_plan" value="{{ diet_plan | tojson }}">
+            <input type="hidden" name="total_nutrition" value="{{ total_nutrition | tojson }}">
+            <button type="submit" class="btn bg-blue-500 text-white px-4 py-2 rounded mt-4">Export to PDF</button>
+        </form>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

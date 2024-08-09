@@ -14,7 +14,6 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'b36dd7112dmsh3b62d6610452179p13e36ejsn775dc48b9b14'
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)
-PERSONAL_API_KEY = 'AIzaSyBOLJaZgumeGMEiTNi2XtJLXkVgfxHtOe8'
 
 
 def init_db():

@@ -45,6 +45,6 @@ A diet planner application using Flask, SQLite, Generative AI (Gemini Flash 1.5)
 ## Usage
 
 1. Sign up or log in to the application.
-2. Enter your Gemini API key.
+2. Enter your Gemini API key(if you don't have an API key you can continue without an API key).
 3. Fill in the required details to generate a diet plan.
 4. View the diet plan and export it to PDF.
